@@ -8,7 +8,6 @@ export class ProductModel extends Model {
       id: this.uid(),
       name: this.string(''),
       cost: this.number(null),
-      inBasket: this.number(0)
     }
   }
 }
