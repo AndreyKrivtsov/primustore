@@ -1,0 +1,21 @@
+.list {
+    margin-top: 30px;
+
+    .list__title {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .list__items {
+        margin: 10px auto 0 auto;
+        width: 600px;
+    }
+
+    .list__items > div {
+        display: flex;
+
+        & div:nth-child(n) {
+            width: 25%;
+        }
+    }
+}

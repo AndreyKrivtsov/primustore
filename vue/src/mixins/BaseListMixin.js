@@ -1,3 +1,5 @@
+import '../assets/style.scss'
+
 export default {
     name: 'BaseListMixin',
 
