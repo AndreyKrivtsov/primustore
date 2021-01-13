@@ -1,6 +1,6 @@
-import { PrimusForm } from '@/primusfront/forms/PrimusForm'
-import BaseFieldSet from '@/primusfront/components/baseFieldSet'
-import {assign} from '@/primusfront/utils/object'
+import { PrimusForm } from '../forms/PrimusForm'
+import BaseFieldSet from './baseFieldSet'
+import {assign} from '../utils/object'
 
 export const BaseItemForm = {
   name: 'BaseItemForm',

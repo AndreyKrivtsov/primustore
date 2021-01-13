@@ -1,8 +1,8 @@
 import {BaseGraphQLApi} from './GraphQLApi'
-import {BaseRESTApi} from '@/primusfront/api/RestApi'
-import {BaseApi} from '@/primusfront/api/BaseApi'
+import {BaseRESTApi} from '../../primusfront/api/RestApi'
+import {BaseApi} from '../../primusfront/api/BaseApi'
 import {getComponentConfig} from '../utils/config'
-import {assign} from '@/primusfront/utils/object'
+import {assign} from '../../primusfront/utils/object'
 
 export class ApiAdapter extends BaseApi {
   GraphQLApiClass = BaseGraphQLApi

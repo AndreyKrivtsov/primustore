@@ -1,7 +1,7 @@
-import { ApiItemMixin } from '@/primusfront/api/item'
+import { ApiItemMixin } from '../../primusfront/api/item'
 import { VuetifyItemTemplate } from './templates'
 import _ from 'lodash'
-import BaseItemForm from '@/primusfront/components/baseItemForm'
+import BaseItemForm from '../../primusfront/components/baseItemForm'
 
 // компонент интегрирующий работу с формой
 export const BaseItemMixin = {
@@ -57,13 +57,13 @@ export const BaseItemMixin = {
     saveHandler: function () {
       let id = this.instance.id
       if (id && this.validateForm()) {
-        this.updateItem(id)
+        this.updateItem(id) // аргумент не определен в функции
       }
     },
     submitHandler: function () {
       let id = this.instance.id
       if (id) {
-        this.updateItem(id)
+        this.updateItem(id) // аргумент не определен в функции
       } else {
         this.createItem()
       }

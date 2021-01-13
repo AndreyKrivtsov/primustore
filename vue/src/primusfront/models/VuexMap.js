@@ -55,7 +55,6 @@ export class PrimusVuexOrmApiModelMap {
             data = this._prepareDataAfterGetOrmListResponse(data)
             let listOfId = data.map(i => i.id)
             return this.Model.create({data}).then(() => {
-              console.log(data)
               let modelInstances = this.Model.query().withAllRecursive().whereIdIn(listOfId).get()
               this._afterGetOrmList(modelInstances) // ? MAY BE DEPRECATED
               return modelInstances

@@ -1,35 +1,22 @@
-//import store from './store'
-
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router'
 import Notifications from 'vue-notification'
-
 import Vuex from 'vuex'
 import VuexORM from '@vuex-orm/core'
 
 import { PrimusFront } from './primusfront'
+import { adminCompToReg } from './components'
+import ModelDatabase from '@/models'
 
-// Models
-import ProductModel from './models/ProductModel'
+import VForm from './components/VComponents/VForm'
+import VCol from './components/VComponents/VCol'
+import VRow from './components/VComponents/VRow'
+import VTextField from './components/VComponents/VTextField'
 
 Vue.config.productionTip = false
 
-// инициализация orm
-const database = new VuexORM.Database()
-
-// регистрация объектов orm в хранилище
-database.register(ProductModel)
-// Вторую модель регистрирует ModelStore
-//database.register(ShoppingCardModel)
-
-Vue.use(Vuex)
-const store = new Vuex.Store({
-    plugins: [VuexORM.install(database)]
-})
-
 Vue.use(PrimusFront, {
-    Global: { defaultDesign: '' },
+    Global: { defaultDesign: 'vuetify' },
     API: {
         getListLimit: 10,
         axiosConnector: { one: 1 },
@@ -38,10 +25,26 @@ Vue.use(PrimusFront, {
     }
 })
 
+Vue.use(Vuex)
+const store = new Vuex.Store({
+    plugins: [VuexORM.install(ModelDatabase)]
+})
+
 Vue.use(Notifications)
 
+// глобальная регистрация компонентов раздела "@/components"
+adminCompToReg.forEach(({ name, config } = {}) => {
+    let conf = config.default || config
+    let compName = conf.name
+    Vue.component(compName, conf)
+})
+
+// Заглушка для vuetify
+Vue.component('VForm', VForm)
+Vue.component('VCol', VCol)
+Vue.component('VRow', VRow)
+Vue.component('VTextField', VTextField)
+
 new Vue({
-    router,
-    store,
     render: h => h(App)
 }).$mount('#app')

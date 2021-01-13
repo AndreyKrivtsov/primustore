@@ -1,16 +1,8 @@
 import _ from 'lodash'
 import { GraphQLString, GraphQLList, GraphQLObjectType, GraphQLNonNull, GraphQLSchema, GraphQLInt } from 'graphql'
 
-import ProductsDb from './data/products.js'
-
-const products = [...ProductsDb]
-const shoppingCard = [
-    {
-        id: '8dlx7af45fd39dv79ad',
-        name: 'Product 4',
-        cost: '15',
-    },
-]
+import Products from './data/products.js'
+import ShoppingCard from './data/shopping-card.js'
 
 const ProductType = new GraphQLObjectType({
     name: "product",
@@ -19,6 +11,7 @@ const ProductType = new GraphQLObjectType({
         id: { type: GraphQLString },
         name: { type: GraphQLString },
         cost: { type: GraphQLString },
+        limit: { type: GraphQLString }
     })
 })
 
@@ -26,13 +19,25 @@ const ShoppingCardType = new GraphQLObjectType({
     name: "ShoppingCard",
     description: "ShoppingCard desc",
     fields: () => ({
-        id: { type: GraphQLString },
-        name: { type: GraphQLString },
-        cost: { type: GraphQLString },
+        id: { type: new GraphQLNonNull(GraphQLString) },
+        products: {
+            type: ProductType,
+            resolve: function (card) {
+                return _.find(Products, a => a.id == card.products_id)
+            }
+        },
+
     })
 })
 
-const BlogQueryRootType = new GraphQLObjectType({
+const TestType = new GraphQLObjectType({
+    name: "Test",
+    resolve: function () {
+        return 'sdgsdfds'
+    }
+})
+
+const QueryRootType = new GraphQLObjectType({
     name: "Query",
     description: "Query desc",
     fields: () => ({
@@ -44,20 +49,23 @@ const BlogQueryRootType = new GraphQLObjectType({
                 limit: { type: GraphQLInt }
             },
             resolve: function (root, args) {
-                return products
+                return Products
             }
         },
         shoppingCard: {
             type: new GraphQLList(ShoppingCardType),
             description: "List of all ShoppingCard",
-            args: {
-                id: { type: GraphQLString },
-                limit: { type: GraphQLInt }
-            },
             resolve: function () {
-                return shoppingCard
+                return ShoppingCard
             }
         },
+        hello: {
+            type: GraphQLString,
+
+            resolve: function () {
+                return "Hello World";
+            }
+        }
     })
 })
 
@@ -68,29 +76,31 @@ const MutationRootType = new GraphQLObjectType({
         createProduct: {
             type: ProductType,
             args: {
-                id: { type: GraphQLString },
-                name: { type: GraphQLString },
-                cost: { type: GraphQLString },
+                // input: { type: inputMovieType }
             },
             resolve: function (source, args) {
-                if (!args.id) args.id = Array(20).fill(0, 0).map(byte => (byte + Math.ceil(Math.random() * 16)).toString(16)).join('')
-                
-                let newProduct = {
-                    id: args.id, 
-                    name: args.name, 
-                    cost: args.cost, 
-                }
+                console.log(args)
 
-                products.push(newProduct)
-                return newProduct
+                // let product = {
+                //     id: args.id, 
+                //     name: args.name, 
+                //     year: args.year, 
+                //     directorId: args.directorId
+                // }
+
+                // console.log(product)
+
+                // Products.push(product)
+
+                // return _.find(Products, { id: args.input.id })
             }
         }
     }
 })
 
 const AppSchema = new GraphQLSchema({
-    query: BlogQueryRootType,
-    mutation: MutationRootType
+    query: QueryRootType,
+    //mutation: MutationRootType
 })
 
 export default AppSchema
