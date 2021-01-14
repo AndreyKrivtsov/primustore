@@ -1,0 +1,6 @@
+FROM node:lts-alpine
+WORKDIR /app
+COPY ./vue/package*.json ./
+COPY ./vue/.* ./
+COPY ./vue/*.* ./
+RUN npm install
