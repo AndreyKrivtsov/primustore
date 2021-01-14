@@ -26,5 +26,4 @@ npm install
 npm run dev
 ```
 
-#### back-end будет запущен по адресу http://localhost:3000
-##### В браузере будет открыт GraphiQl для тестирования gql запросов
+#### back-end будет запущен по адресу http://localhost:3000 (в браузере будет открываться GraphiQl для тестирования gql запросов)
