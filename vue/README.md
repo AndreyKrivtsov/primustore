@@ -1,29 +1,19 @@
-# primustore
+# primustore fron-end
 
-## Project setup
+## Требования:
+    1. nodejs версии 13.12.0 или выше
+
+## Запуск проекта
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
 ```
-npm run serve
+npm run dev
 ```
 
-### Compiles and minifies for production
+### go to http://localhost:8081 (если порт 8081 занят, то проект запускается на порту 8082)
+
+## Сборка в prod
 ```
 npm run build
 ```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
