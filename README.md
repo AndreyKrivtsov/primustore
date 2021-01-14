@@ -5,7 +5,7 @@
 ### Требования:
 + docker
 
-### 1. Запуск
+### 1. Запуск в Docker
 ```
 docker-compose up
 ```
