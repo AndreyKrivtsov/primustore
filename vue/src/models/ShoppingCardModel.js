@@ -7,6 +7,7 @@ export class ShoppingCardModel extends Model {
     static fields() {
         return {
             id: this.uid(),
+            productId: this.attr(null),
             name: this.string(''),
             cost: this.number(null),
         }

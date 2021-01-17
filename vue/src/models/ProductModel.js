@@ -6,8 +6,10 @@ export class ProductModel extends Model {
   static fields () {
     return {
       id: this.uid(),
+      categoryId: this.string(''),
       name: this.string(''),
-      cost: this.number(null),
+      cost: this.string(''),
+      imgUrl: this.string(''),
     }
   }
 }

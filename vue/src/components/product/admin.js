@@ -17,7 +17,6 @@ export class ProductAdmin extends PrimusAdmin {
             itemHeader: 'Продукт',
             listHeader: 'Список продуктов',
             basedComponents: {
-                'list': { componentName: 'ProductList', mixins: [BaseListMixin, ProductMixin] },
                 'add': { componentName: 'ProductAdd', mixins: [BaseAddMixin] }
             }
         }

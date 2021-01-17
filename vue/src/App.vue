@@ -1,58 +1,23 @@
 <template>
     <div id="app">
-        <div>
-            <button v-for="tab in tabs" :key="tab.id" @click="showComponent(tab.component)">
-                {{ tab.title }}
-            </button>
+        <Header />
+        <div class="app-content">
+            <router-view />
         </div>
-        <div>
-            <component v-if="activeComponent" v-bind:is="activeComponent.name" v-bind="activeComponent.attrs" @update-item="onUpdate"></component>
-        </div>
+        <Footer />
     </div>
 </template>
 
 
 <script>
-import ComponentModel from './models/ComponentModel'
+import Header from './components/layouts/Header'
+import Footer from './components/layouts/Footer'
 
 export default {
     name: 'App',
-
-    data() {
-        return {
-            tabs: [
-                { id: 1, title: 'Список продуктов', component: 'ProductList' },
-                { id: 2, title: 'Корзина продуктов', component: 'ShoppingCart' },
-                { id: 3, title: 'Добавить продукт', component: 'ProductAdd' },
-            ],
-        }
-    },
-
-    computed: {
-        activeComponent() {
-            return ComponentModel.query().where('active', true).first()
-        },
-    },
-
-    methods: {
-        showComponent(name) {
-            if (this.activeComponent) ComponentModel.delete(this.activeComponent.id)
-
-            ComponentModel.insert({
-                data: {
-                    name,
-                    active: true,
-                    attrs: { id: 0 }
-                },
-            })
-        },
-        onUpdate() {
-            console.log('onUpdate in App')
-        }
-    },
-
-    mounted() {
-        this.showComponent('ProductList')
+    components: {
+        Header,
+        Footer
     }
 }
 </script>
@@ -60,10 +25,16 @@ export default {
 
 <style lang="scss">
 #app {
+    position: relative;
     font-family: Avenir, Helvetica, Arial, sans-serif;
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
+    color: var(--primaryTextColor);
+
+    .app-content {
+        margin: 30px 0;
+    }
 }
 </style>

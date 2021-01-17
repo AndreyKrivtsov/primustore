@@ -1,34 +1,31 @@
 import _ from 'lodash'
-import { GraphQLString, GraphQLList, GraphQLObjectType, GraphQLNonNull, GraphQLSchema, GraphQLInt } from 'graphql'
+import { GraphQLString, GraphQLList, GraphQLObjectType, GraphQLBoolean, GraphQLSchema, GraphQLInt } from 'graphql'
 
-import ProductsDb from './data/products.js'
+import ProductsData from './data/products.js'
+import CategoryData from './data/category.js'
 
-const products = [...ProductsDb]
-const shoppingCard = [
-    {
-        id: '8dlx7af45fd39dv79ad',
-        name: 'Product 4',
-        cost: '15',
-    },
-]
+const products = [...ProductsData]
+const categories = [...CategoryData]
 
 const ProductType = new GraphQLObjectType({
     name: "product",
     description: "Products desc",
     fields: () => ({
         id: { type: GraphQLString },
+        categoryId: { type: GraphQLString },
         name: { type: GraphQLString },
         cost: { type: GraphQLString },
+        imgUrl: { type: GraphQLString },
     })
 })
 
-const ShoppingCardType = new GraphQLObjectType({
-    name: "ShoppingCard",
-    description: "ShoppingCard desc",
+const CategoryType = new GraphQLObjectType({
+    name: "Category",
+    description: "Category desc",
     fields: () => ({
         id: { type: GraphQLString },
         name: { type: GraphQLString },
-        cost: { type: GraphQLString },
+        active: { type: GraphQLBoolean },
     })
 })
 
@@ -47,15 +44,15 @@ const BlogQueryRootType = new GraphQLObjectType({
                 return products
             }
         },
-        shoppingCard: {
-            type: new GraphQLList(ShoppingCardType),
+        category: {
+            type: new GraphQLList(CategoryType),
             description: "List of all ShoppingCard",
             args: {
                 id: { type: GraphQLString },
                 limit: { type: GraphQLInt }
             },
             resolve: function () {
-                return shoppingCard
+                return categories
             }
         },
     })
@@ -69,20 +66,28 @@ const MutationRootType = new GraphQLObjectType({
             type: ProductType,
             args: {
                 id: { type: GraphQLString },
+                categoryId: { type: GraphQLString },
                 name: { type: GraphQLString },
                 cost: { type: GraphQLString },
+                imgUrl: { type: GraphQLString },
             },
             resolve: function (source, args) {
                 if (!args.id) args.id = Array(20).fill(0, 0).map(byte => (byte + Math.ceil(Math.random() * 16)).toString(16)).join('')
-                
-                let newProduct = {
-                    id: args.id, 
-                    name: args.name, 
-                    cost: args.cost, 
-                }
-
-                products.push(newProduct)
-                return newProduct
+                products.push(args)
+                return args
+            }
+        },
+        createCategory: {
+            type: CategoryType,
+            args: {
+                id: { type: GraphQLString },
+                name: { type: GraphQLString },
+                active: { type: GraphQLBoolean },
+            },
+            resolve: function (source, args) {
+                if (!args.id) args.id = categories.length
+                categories.push(args)
+                return args
             }
         }
     }

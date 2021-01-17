@@ -1,9 +1,8 @@
 import { BaseGraphQLApi, mapModelFields } from '../../primusfront/api/GraphQLApi'
-import ProductModel from '../../models/ProductModel'
 
-export class ShoppingCardGQLApi extends BaseGraphQLApi {
+export class CategoryGQLApi extends BaseGraphQLApi {
     constructor(obj) {
-        obj.objectName = 'shoppingCard'
+        obj.objectName = 'category'
         super(obj)
     }
 

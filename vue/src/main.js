@@ -1,8 +1,9 @@
 import Vue from 'vue'
+import router from './router'
 import App from './App.vue'
-import Notifications from 'vue-notification'
 import Vuex from 'vuex'
 import VuexORM from '@vuex-orm/core'
+import Notifications from 'vue-notification'
 
 import { PrimusFront } from './primusfront'
 import { adminCompToReg } from './components'
@@ -46,5 +47,6 @@ Vue.component('VRow', VRow)
 Vue.component('VTextField', VTextField)
 
 new Vue({
+    router,
     render: h => h(App)
 }).$mount('#app')

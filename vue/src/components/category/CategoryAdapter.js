@@ -1,9 +1,9 @@
 import { ApiAdapter } from '../../primusfront/api/adapter'
 import { apolloClient } from '@/plugins/apolloClient'
-import { ShoppingCardGQLApi } from './ShoppingCardGQLApi'
+import { CategoryGQLApi } from './CategoryGQLApi'
 
-export class ShoppingCardAdapter extends ApiAdapter {
-  GraphQLApiClass = ShoppingCardGQLApi
+export class CategoryAdapter extends ApiAdapter {
+  GraphQLApiClass = CategoryGQLApi
   constructor (obj) {
     let baseAttrs = {
       apiType: 'apollo',
