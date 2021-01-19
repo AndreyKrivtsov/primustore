@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import ShoppingCardModel from '../../models/ShoppingCardModel'
+import ShoppingCardModel from '@/models/ShoppingCardModel'
 import PButton from '../ui/PButton'
 
 export default {

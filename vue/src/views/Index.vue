@@ -13,11 +13,11 @@
 </template>
 
 <script>
-import ComponentModel from '../models/ComponentModel'
-import ProductList from '../components/product/ProductList'
-import ShoppingCard from '../components/shoppingCard/ShoppingCard'
-import PButton from '../components/ui/PButton'
-import CategoryList from '../components/category/CategoryList.vue'
+import ComponentModel from '@/models/ComponentModel'
+import ProductList from '@/components/product/ProductList'
+import ShoppingCard from '@/components/shoppingCard/ShoppingCard'
+import PButton from '@/components/ui/PButton'
+import CategoryList from '@/components/category/CategoryList'
 
 export default {
     name: 'Index',

@@ -1,5 +1,5 @@
-import { PrimusForm } from '../../primusfront/forms/PrimusForm'
-import { CharField, IDField, PositiveIntegerField } from '../../primusfront/forms/fields'
+import { PrimusForm } from '@/primusfront/forms/PrimusForm'
+import { CharField, IDField, PositiveIntegerField } from '@/primusfront/forms/fields'
 
 export class ProductForm extends PrimusForm {
     fields() {

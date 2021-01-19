@@ -31,7 +31,7 @@
 
 <script>
 import { adminInstance } from './admin'
-import ShoppingCardModel from '../../models/ShoppingCardModel'
+import ShoppingCardModel from '@/models/ShoppingCardModel'
 import PButton from '../ui/PButton'
 
 /*

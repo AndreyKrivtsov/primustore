@@ -102,12 +102,21 @@ export class PrimusAdmin {
     generateComponentByName(name) {
         let vm = this
         if (!this.basedComponents.hasOwnProperty(name)) { return {} }
-        console.log('[PrimusAdmin] Generated component', this.basedComponents[name].componentName)
-        return {
-            name: this.basedComponents[name].componentName,
-            mixins: this.basedComponents[name].mixins,
-            data() { return vm.generateBaseData() }
+
+        const basedComponent = this.basedComponents[name]
+        const component = {
+            name: basedComponent.componentName,
+            data() { return vm.generateBaseData() },
         }
+        if (basedComponent.mixins) component.mixins = basedComponent.mixins
+        if (basedComponent.template) component.template = basedComponent.template
+        if (basedComponent.render) component.render = function (createElement) {
+            return createElement(basedComponent.render)
+        }
+
+        console.log('[PrimusAdmin] Generated component', component.name)
+
+        return component
     }
     generateItemComponent() { return this.generateComponentByName('item') }
     generateListComponent() { return this.generateComponentByName('list') }

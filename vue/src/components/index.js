@@ -1,16 +1,24 @@
-const requireAdminComponent = require.context('.', true, /admin.js$/)
+const requireAdminComponent = require.context('./admin', true, /admin.js$/)
 
 export const adminCompToReg = requireAdminComponent.keys().map(fileName => {
-    let folder = fileName.replace('./', '').replace('/admin.js', '') // fileName.split('/')[1] || null // HERE WAS AN ERROR
-    let adminInstance = requireAdminComponent(fileName).adminInstance || null
+    const folder = fileName.replace('./', '').replace('/admin.js', '') // fileName.split('/')[1] || null // HERE WAS AN ERROR
+    const adminInstance = requireAdminComponent(fileName).adminInstance || null
     if (adminInstance) {
-        let components = []
+        const components = []
+        const header = adminInstance.listHeader
         for (let item in adminInstance.basedComponents) {
             try {
-                let component = require(`./${folder}/${item}`).default
-                components.push({ name: component.name, config: component })
+                const component = require(`./${folder}/${item}`).default
+                components.push({
+                    name: component.name,
+                    config: { component, header }
+                })
             } catch (err) {
-                components.push({ name: adminInstance.basedComponents[item].componentName, config: adminInstance.generateComponentByName(item) })
+                const component = adminInstance.generateComponentByName(item)
+                components.push({
+                    name: adminInstance.basedComponents[item].componentName,
+                    config: { component, header }
+                })
             }
         }
         return components

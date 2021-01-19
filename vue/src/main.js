@@ -8,11 +8,14 @@ import Notifications from 'vue-notification'
 import { PrimusFront } from './primusfront'
 import { adminCompToReg } from './components'
 import ModelDatabase from '@/models'
+import ComponentModel from './models/ComponentModel'
 
 import VForm from './components/VComponents/VForm'
 import VCol from './components/VComponents/VCol'
 import VRow from './components/VComponents/VRow'
 import VTextField from './components/VComponents/VTextField'
+
+import '@/assets/style.scss'
 
 Vue.config.productionTip = false
 
@@ -33,10 +36,19 @@ const store = new Vuex.Store({
 
 Vue.use(Notifications)
 
-// глобальная регистрация компонентов раздела "@/components"
+// глобальная регистрация компонентов раздела "@/components/admin"
 adminCompToReg.forEach(({ name, config } = {}) => {
-    let conf = config.default || config
+    let conf = config.component.default || config.component
     let compName = conf.name
+    console.log(conf)
+    ComponentModel.insert({
+        data: {
+            header: config.header,
+            name: compName,
+            attrs: {},
+            active: false
+        }
+    })
     Vue.component(compName, conf)
 })
 

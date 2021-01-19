@@ -1,9 +1,12 @@
+<template>
+    <div>sfsfdsdfsfsdf</div>
+</template>
+
+<script>
 //import PButton from '@/components/ui/PButton'
 
-export const BaseListMixin = {
-    name: 'BaseListMixin',
-
-    //template: '<div>sdfsfsdfsdf</div>',
+export default {
+    name: 'BaseListComponent',
 
     //components: { PButton },
 
@@ -19,7 +22,7 @@ export const BaseListMixin = {
         // },
     },
 
-    mounted() {
+    async mounted() {
         // await this.adminInstance.ormMapper.getOrmList().then((items) => {
         //     this.items = items
         // })
@@ -29,18 +32,6 @@ export const BaseListMixin = {
         console.log('mounted mixin')
     },
 
-    render: function (createElement) {
-        return createElement('h1', 'Privet')
-      }
-
-    // render: function (createElement) {
-    //     return createElement(
-    //         'h1',   // имя тега
-    //         this.$slots.default // массив дочерних элементов
-    //     )
-    // },
-
     //render: require('../templates/ListTemplate.vue').default.render
 }
-
-export default BaseListMixin
+</script>
